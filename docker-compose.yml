@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  grist:
+    image: technologiestiftung/grist:main
+    container_name: dashboard
+    restart: unless-stopped
+    ports:
+      - "11082:80"
+    volumes:
+      - persist:/persist
+    environment:
+      - PGID=33
+      - PUID=33
+      - DEBUG=0
+      - PORT=80
+      - APP_DOC_URL=https://"${DOMAIN:-grist.citylab.berlin}"
+      - APP_HOME_URL=https://"${DOMAIN:-grist.citylab.berlin}"
+      - GRIST_SINGLE_ORG=docs
+      - GRIST_ORG_IN_PATH=true
+      - GRIST_DOMAIN="${DOMAIN:-grist.citylab.berlin}"
+      - GRIST_DEFAULT_EMAIL=${EMAIL:-noreply@tsbberlin.de}
+      - GRIST_SESSION_COOKIE="${DOMAIN:-grist.citylab.berlin}"
+      - GRIST_MAX_UPLOAD_ATTACHMENT_MB=256
+      - GRIST_MAX_UPLOAD_IMPORT_MB=256
+
+      # Before Enabling this variables, copy the SAML keys and certs into the container volume.
+      #- GRIST_SAML_SP_HOST=https://${DOMAIN}
+      #- GRIST_SAML_SP_KEY=/persist/saml/grist.key
+      #- GRIST_SAML_SP_CERT=/persist/saml/grist.cert
+      #- GRIST_SAML_IDP_LOGIN=${SAML_URL}
+      #- GRIST_SAML_IDP_LOGOUT=${SAML_URL}
+      #- GRIST_SAML_IDP_UNENCRYPTED=1
+      #- GRIST_SAML_IDP_CERTS=/persist/saml/idp.cert
+
+
+volumes:
+  persist:
+
+### HELP
+
+#      - GRIST_SAML_SP_KEY
+#        Path to file with our private key, PEM format.
+#      - GRIST_SAML_SP_CERT
+#        Path to file with our public key, PEM format.
+#      - GRIST_SAML_IDP_LOGIN
+#        Login url to redirect user to for log-in.
+#      - GRIST_SAML_IDP_LOGOUT
+#        Logout URL to redirect user to for log-out.
+#      - GRIST_SAML_IDP_SKIP_SLO
+#        If set and non-empty, don't attempt "Single Logout" flow (which I haven't gotten to
+#        work), but simply redirect to GRIST_SAML_IDP_LOGOUT after clearing session.
+#      - GRIST_SAML_IDP_CERTS
+#        Comma-separated list of paths for certificates from identity provider, PEM format.
+#      - GRIST_SAML_IDP_UNENCRYPTED
