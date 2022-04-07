@@ -18,11 +18,11 @@ After creating a Realm
  7. Switch to the tab "Mappers"
  8. Click on **Add Builtin**
  9. Add `X500 givenName`, `X500 email` and `X500 surname`
- 
+
 ### How to copy keys and certificates
- 
+
  This part will require you to put together the key and cert files. Basically a copy/paste into the docker volume.
- 
+
  1. Go to the tab **Keys** and copy the contents into files called *key.pem* and *cert.pem*
  2. Go to **Realm Settings**  > **General**  tab and click on **SAML 2.0 Identity Provider Metadata**
  3. Copy the contents of content of **ds:X509Certificate** into a file called idp.pem
@@ -30,11 +30,11 @@ After creating a Realm
     -   `-----BEGIN RSA PRIVATE KEY-----`/`-----END RSA PRIVATE KEY-----`
     -   `-----BEGIN CERTIFICATE-----`/`-----END CERTIFICATE-----`
   5. Copy the files into the docker volume "saml". How you do that depends on your set up.
-  6. You should have key.pem, cert.pem and idp.pem in the folder
+  6. You should have key.pem, cert.pem and ipm.pem in the folder
 
 
 
-<!-- 
+<!--
 
 -   Keycloak needs to know where to redirect after login/logout
     -   Allow redirecting after login by setting the  **Valid Redirect URIs**  to  `https://<grist-host>/*`

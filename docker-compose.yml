@@ -29,7 +29,7 @@ services:
       #- GRIST_SAML_SP_HOST=https://${DOMAIN}
       #- GRIST_SAML_SP_KEY=/saml/key.pem
       #- GRIST_SAML_SP_CERT=/saml/cert.pem
-      #- GRIST_SAML_IDP_CERTS=/saml/idp.pem
+      #- GRIST_SAML_IDP_CERTS=/saml/ipm.pem
       #- GRIST_SAML_IDP_LOGIN=${SAML_URL}
       #- GRIST_SAML_IDP_LOGOUT=${SAML_URL}
       #- GRIST_SAML_IDP_UNENCRYPTED=1
