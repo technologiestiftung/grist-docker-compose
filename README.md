@@ -1,15 +1,41 @@
+
 # grist-docker-compose
 Docker-compose for grist
 
 
 Temporary instructions for integration with keycloak
 
+## Keycloak integration
 
-I just got it working with Keycloak 17. It's a complicated beast that supports multiple multiple realms and protocols. Some things were not obvious to me (as a noob to Grist, Keycloak, and SAML)...
+After creating a Realm
 
-I already had a realm and user, so I only needed to create a Grist-specific SAML client:
+ 1. Go to > Clients > Create
+ 2. The  **Client ID**  in Keycloak should be  `https://<grist-host>/saml/metadata.xml`
+ 3. Save the new client
+ 4. Set **Valid Redirect URIs**  to  `https://<grist-host>/*` and   `https://<grist-host>/`
+ 5. Go to **Fine Grain SAML Endpoint Configuration** and set **Logout Service Redirect Binding URL** to `https://<grist-host>/`
+ 6. Save the settings
+ 7. Switch to the tab "Mappers"
+ 8. Click on **Add Builtin**
+ 9. Add `X500 givenName`, `X500 email` and `X500 surname`
+ 
+### How to copy keys and certificates
+ 
+ This part will require you to put together the key and cert files. Basically a copy/paste into the docker volume.
+ 
+ 1. Go to the tab **Keys** and copy the contents into files called *key.pem* and *cert.pem*
+ 2. Go to **Realm Settings**  > **General**  tab and click on **SAML 2.0 Identity Provider Metadata**
+ 3. Copy the contents of content of **ds:X509Certificate** into a file called idp.pem
+ 4. Add to each file the PEM headers/footers:
+    -   `-----BEGIN RSA PRIVATE KEY-----`/`-----END RSA PRIVATE KEY-----`
+    -   `-----BEGIN CERTIFICATE-----`/`-----END CERTIFICATE-----`
+  5. Copy the files into the docker volume "saml". How you do that depends on your set up.
+  6. You should have key.pem, cert.pem and idp.pem in the folder
 
--   The  **Client ID**  in Keycloak should be  `https://<grist-host>/saml/metadata.xml`
+
+
+<!-- 
+
 -   Keycloak needs to know where to redirect after login/logout
     -   Allow redirecting after login by setting the  **Valid Redirect URIs**  to  `https://<grist-host>/*`
     -   Enable redirecting after logout by setting the  **Logout Service Redirect Binding URL**  (under  **Fine Grain SAML Endpoint Configuration**)
@@ -27,4 +53,4 @@ Grist needs the following information from Keycloak:
     -   `-----BEGIN RSA PRIVATE KEY-----`/`-----END RSA PRIVATE KEY-----`
     -   `-----BEGIN CERTIFICATE-----`/`-----END CERTIFICATE-----`
 
-Here's how I start Grist (behind a reverse-proxy):
+-->
