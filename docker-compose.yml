@@ -14,13 +14,13 @@ services:
       - PUID=33
       - DEBUG=0
       - PORT=80
-      - APP_DOC_URL=https://"${DOMAIN:-grist.citylab.berlin}"
-      - APP_HOME_URL=https://"${DOMAIN:-grist.citylab.berlin}"
+      - APP_DOC_URL=https://${DOMAIN:-grist.citylab.berlin}
+      - APP_HOME_URL=https://${DOMAIN:-grist.citylab.berlin}
       - GRIST_SINGLE_ORG=docs
       - GRIST_ORG_IN_PATH=true
-      - GRIST_DOMAIN="${DOMAIN:-grist.citylab.berlin}"
+      - GRIST_DOMAIN=${DOMAIN:-grist.citylab.berlin}
       - GRIST_DEFAULT_EMAIL=${EMAIL:-noreply@tsbberlin.de}
-      - GRIST_SESSION_COOKIE="${DOMAIN:-grist.citylab.berlin}"
+      - GRIST_SESSION_COOKIE=${DOMAIN:-grist.citylab.berlin}
       - GRIST_MAX_UPLOAD_ATTACHMENT_MB=256
       - GRIST_MAX_UPLOAD_IMPORT_MB=256
 
@@ -28,11 +28,10 @@ services:
       #- GRIST_SAML_SP_HOST=https://${DOMAIN}
       #- GRIST_SAML_SP_KEY=/persist/saml/grist.key
       #- GRIST_SAML_SP_CERT=/persist/saml/grist.cert
+      #- GRIST_SAML_IDP_CERTS=/persist/saml/idp.cert
       #- GRIST_SAML_IDP_LOGIN=${SAML_URL}
       #- GRIST_SAML_IDP_LOGOUT=${SAML_URL}
       #- GRIST_SAML_IDP_UNENCRYPTED=1
-      #- GRIST_SAML_IDP_CERTS=/persist/saml/idp.cert
-
 
 volumes:
   persist:
