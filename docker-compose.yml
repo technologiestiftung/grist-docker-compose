@@ -9,6 +9,7 @@ services:
       - "11082:80"
     volumes:
       - persist:/persist
+      - saml:/saml
     environment:
       - PGID=33
       - PUID=33
@@ -24,17 +25,18 @@ services:
       - GRIST_MAX_UPLOAD_ATTACHMENT_MB=256
       - GRIST_MAX_UPLOAD_IMPORT_MB=256
 
-      # Before Enabling this variables, copy the SAML keys and certs into the container volume.
+      # Before Enabling this variables, copy the SAML keys and certs into the saml volume.
       #- GRIST_SAML_SP_HOST=https://${DOMAIN}
-      #- GRIST_SAML_SP_KEY=/persist/saml/grist.key
-      #- GRIST_SAML_SP_CERT=/persist/saml/grist.cert
-      #- GRIST_SAML_IDP_CERTS=/persist/saml/idp.cert
+      #- GRIST_SAML_SP_KEY=/saml/grist.key
+      #- GRIST_SAML_SP_CERT=/saml/grist.cert
       #- GRIST_SAML_IDP_LOGIN=${SAML_URL}
       #- GRIST_SAML_IDP_LOGOUT=${SAML_URL}
       #- GRIST_SAML_IDP_UNENCRYPTED=1
+      #- GRIST_SAML_IDP_CERTS=/saml/idp.cert
 
 volumes:
   persist:
+  saml:
 
 ### HELP
 
