@@ -21,7 +21,7 @@ Docker, Docker-compose
 After creating a Realm
 
  1. Go to > Clients > Create
- 2. The  **Client ID**  in Keycloak should be  `https://<grist-host>/saml/metadata.xml`
+ 2. The  **Client ID**  in Keycloak should be  `https://<grist-host>/saml/metadata.xml`. The type should be SAML
  3. Save the new client
  4. Set **Valid Redirect URIs**  to  `https://<grist-host>/*` and   `https://<grist-host>/`
  5. Go to **Fine Grain SAML Endpoint Configuration** and set **Logout Service Redirect Binding URL** to `https://<grist-host>/`
