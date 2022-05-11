@@ -1,12 +1,13 @@
-![](https://img.shields.io/badge/Build%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiesitftung%20Berlin-blue)
+![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-
-
 # grist-docker-compose
+
 Docker-compose for grist
 
 Instructions for integration with keycloak
@@ -15,35 +16,32 @@ Instructions for integration with keycloak
 
 Docker, Docker-compose
 
-
 ## Keycloak integration
 
 After creating a Realm
 
- 1. Go to > Clients > Create
- 2. The  **Client ID**  in Keycloak should be  `https://<grist-host>/saml/metadata.xml`. The type should be SAML
- 3. Save the new client
- 4. Set **Valid Redirect URIs**  to  `https://<grist-host>/*` and   `https://<grist-host>/`
- 5. Go to **Fine Grain SAML Endpoint Configuration** and set **Logout Service Redirect Binding URL** to `https://<grist-host>/`
- 6. Save the settings
- 7. Switch to the tab "Mappers"
- 8. Click on **Add Builtin**
- 9. Add `X500 givenName`, `X500 email` and `X500 surname`
+1.  Go to > Clients > Create
+2.  The **Client ID** in Keycloak should be `https://<grist-host>/saml/metadata.xml`. The type should be SAML
+3.  Save the new client
+4.  Set **Valid Redirect URIs** to `https://<grist-host>/*` and `https://<grist-host>/`
+5.  Go to **Fine Grain SAML Endpoint Configuration** and set **Logout Service Redirect Binding URL** to `https://<grist-host>/`
+6.  Save the settings
+7.  Switch to the tab "Mappers"
+8.  Click on **Add Builtin**
+9.  Add `X500 givenName`, `X500 email` and `X500 surname`
 
 ### How to copy keys and certificates
 
- This part will require you to put together the key and cert files. Basically a copy/paste into the docker volume.
+This part will require you to put together the key and cert files. Basically a copy/paste into the docker volume.
 
- 1. Go to the tab **Keys** and copy the contents into files called *key.pem* and *cert.pem*
- 2. Go to **Realm Settings**  > **General**  tab and click on **SAML 2.0 Identity Provider Metadata**
- 3. Copy the contents of content of **ds:X509Certificate** into a file called idp.pem
- 4. Add to each file the PEM headers/footers:
-    -   `-----BEGIN RSA PRIVATE KEY-----`/`-----END RSA PRIVATE KEY-----`
-    -   `-----BEGIN CERTIFICATE-----`/`-----END CERTIFICATE-----`
-  5. Copy the files into the docker volume "saml". How you do that depends on your set up.
-  6. You should have key.pem, cert.pem and ipm.pem in the folder
-
-
+1.  Go to the tab **Keys** and copy the contents into files called _key.pem_ and _cert.pem_
+2.  Go to **Realm Settings** > **General** tab and click on **SAML 2.0 Identity Provider Metadata**
+3.  Copy the contents of content of **ds:X509Certificate** into a file called idp.pem
+4.  Add to each file the PEM headers/footers:
+    - `-----BEGIN RSA PRIVATE KEY-----`/`-----END RSA PRIVATE KEY-----`
+    - `-----BEGIN CERTIFICATE-----`/`-----END CERTIFICATE-----`
+5.  Copy the files into the docker volume "saml". How you do that depends on your set up.
+6.  You should have key.pem, cert.pem and ipm.pem in the folder
 
 <!--
 
@@ -65,7 +63,6 @@ Grist needs the following information from Keycloak:
     -   `-----BEGIN CERTIFICATE-----`/`-----END CERTIFICATE-----`
 
 -->
-
 
 ## Credits
 
