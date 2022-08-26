@@ -64,6 +64,26 @@ Grist needs the following information from Keycloak:
 
 -->
 
+## Example apache configuration
+
+This configuration can be used to proxy grist through an apache server. 
+
+    #
+    RewriteEngine on
+    RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC]
+    RewriteCond %{HTTP:CONNECTION} Upgrade$ [NC]
+    RewriteRule ^/?(.*) "ws://localhost:11082/$1" [P,L]
+    #
+    ProxyPreserveHost On
+    ProxyRequests off
+    ProxyPass / http://localhost:11082/
+    ProxyPassReverse / http://localhost:11082/
+    RequestHeader set X-Forwarded-Proto https
+    Header set Access-Control-Allow-Origin "*"
+    #
+
+
+
 ## Credits
 
 <table>
